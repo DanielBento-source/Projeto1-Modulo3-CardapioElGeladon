@@ -1,22 +1,4 @@
-.PaletaLista {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 25px 50px;
-  }
-  
-  @media (max-width: 1220px) {
-    .PaletaLista {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 840px) {
-    .PaletaLista {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  .PaletaListaItem {
+.PaletaListaItem {
     font-family: "Exo";
     background: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
@@ -72,6 +54,7 @@
     text-transform: uppercase;
     cursor: pointer;
     width: 48%;
+    transition: all 0.2s ease-out;
   }
   
   .Acoes__remover {
