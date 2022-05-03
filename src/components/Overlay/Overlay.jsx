@@ -2,7 +2,7 @@ import './Overlay.css'
 
 function Overlay({children,OverlayOnClick}){
     return (
-        <div className="Overlay" onclick={() => OverlayOnClick()}>
+        <div className="Overlay" onClick={() => OverlayOnClick()}>
         {children}
         </div>
         )

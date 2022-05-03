@@ -1,8 +1,9 @@
+import "./AdicionaPaletaModal.css";
 import { useState, useEffect } from "react";
 import Modal from "components/Modal/Modal";
-import './AdicionaPaletaModal.css'
+import { PaletaService } from "Services/PaletaService";
 
-function AdicionaPaletaModal({ closeModal }) {
+function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
     const form = {
         preco: "",
         sabor: "",
@@ -12,27 +13,45 @@ function AdicionaPaletaModal({ closeModal }) {
     };
 
     const [state, setState] = useState(form);
-
-    const handleChange = (e, name) => {
-        setState({ ...state, [name]: e.target.value, });
-    };
-
     const [canDisable, setCanDisable] = useState(true);
 
-const canDisableSendButton = () => {
-    const response = !Boolean(
-        state.descricao.length
-        && state.foto.length
-        && state.sabor.length
-        && state.preco.length
-    );
+    const canDisableSendButton = () => {
+        const response = !Boolean(
+            state.descricao.length &&
+            state.foto.length &&
+            state.sabor.length &&
+            state.preco.length
+        );
 
-    setCanDisable(response);
-};
+        setCanDisable(response);
+    };
 
-useEffect(() => {
-    canDisableSendButton();
-})
+    const handleChange = (e, name) => {
+        setState({ ...state, [name]: e.target.value });
+    };
+
+    useEffect(() => {
+        canDisableSendButton();
+    });
+
+    const createPaleta = async () => {
+        const renomeiaCaminhoFoto = (fotoPath) => fotoPath.split("\\").pop();
+
+        const { sabor, recheio, descricao, preco, foto } = state;
+
+        const titulo = sabor + (recheio && " com " + recheio);
+
+        const paleta = {
+            sabor: titulo,
+            descricao,
+            preco,
+            foto: `assets/images/${renomeiaCaminhoFoto(foto)}`,
+        };
+
+        const response = await PaletaService.create(paleta);
+        onCreatePaleta(response);
+        closeModal();
+    };
 
     return (
         <Modal closeModal={closeModal}>
@@ -46,8 +65,8 @@ useEffect(() => {
                             placeholder="10,00"
                             type="text"
                             value={state.preco}
-                            onChange={(e) => handleChange(e, "preco")} 
-                            required/>
+                            required
+                            onChange={(e) => handleChange(e, "preco")} />
                     </div>
                     <div>
                         <label className="AdicionaPaletaModal__text" htmlFor="sabor"> Sabor: </label>
@@ -56,8 +75,8 @@ useEffect(() => {
                             placeholder="Chocolate"
                             type="text"
                             value={state.sabor}
-                            onChange={(e) => handleChange(e, "sabor")}
-                            required />
+                            required
+                            onChange={(e) => handleChange(e, "sabor")} />
                     </div>
                     <div>
                         <label className="AdicionaPaletaModal__text" htmlFor="recheio"> Recheio: </label>
@@ -75,8 +94,8 @@ useEffect(() => {
                             placeholder="Detalhe o produto"
                             type="text"
                             value={state.descricao}
-                            onChange={(e) => handleChange(e, "descricao")} 
-                            required/>
+                            required
+                            onChange={(e) => handleChange(e, "descricao")} />
                     </div>
                     <div>
                         <label className="AdicionaPaletaModal__text  AdicionaPaletaModal__foto-label" htmlFor="foto" >
@@ -88,12 +107,17 @@ useEffect(() => {
                             type="file"
                             accept="image/png, image/gif, image/jpeg"
                             value={state.foto}
-                            onChange={(e) => handleChange(e, "foto")} 
-                            required/>
+                            required
+                            onChange={(e) => handleChange(e, "foto")} />
                     </div>
-                    <button type="button" disabled={canDisable} className="AdicionaPaletaModal__enviar"  >
+
+                    <button
+                        className="AdicionaPaletaModal__enviar"
+                        type="button"
+                        disabled={canDisable}
+                        onClick={createPaleta} >
                         Enviar
-                    </button> 
+                    </button>
                 </form>
             </div>
         </Modal>
