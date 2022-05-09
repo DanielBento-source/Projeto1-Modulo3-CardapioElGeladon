@@ -8,7 +8,7 @@ import { ActionMode } from "constants/index"
 
 
 
-function Navbar({createPaleta, updatePaleta, mode, deletePaleta}){
+function Navbar({createPaleta, updatePaleta, mode, deletePaleta, openBag}){
     return(<div className="Home__header Header">
     <div className="row">
         <div className="Header__logo Logo">
@@ -40,7 +40,7 @@ function Navbar({createPaleta, updatePaleta, mode, deletePaleta}){
             <button type="button" className="Opcoes__paleta Paleta" onClick={()=>createPaleta()}>
                 <img src={paleta}  width="40px" className="Paleta__icone" alt="Adicionar paleta" />
             </button>
-            <div className="Opcoes__sacola Sacola">
+            <div className="Opcoes__sacola Sacola" onClick={openBag}>
                 <img src={sacola} width="40px" className="Sacola__icone" alt="Sacola de compras" />
             </div>
         </div>

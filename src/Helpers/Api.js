@@ -7,7 +7,15 @@ const PaletaContext = {
     deletePaletaById: (id) => `${PaletaContext.paletaEndpoint()}/delete-paleta/${id}`,
 };
 
+const SacolaContext = {
+    getSacola: () => `${PaletaContext.paletaEndpoint()}/all-carrinho`,
+    createSacola: () => `${PaletaContext.paletaEndpoint()}/create-carrinho`,
+    purchase: () => `${PaletaContext.paletaEndpoint()}/delete-carrinho`,
+}
+
+
 export const Api = {
-    baseUrl: "http://localhost:3004/paletas",
+    baseUrl: "https://server-elbeladon-daniel-bento.onrender.com/paletas",
     ...PaletaContext,
+    ...SacolaContext,
 };
