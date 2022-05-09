@@ -1,16 +1,17 @@
-import "./AdicionaPaletaModal.css";
+import "./AdicionaEditaPaletaModal.css";
 import { useState, useEffect } from "react";
 import Modal from "components/Modal/Modal";
 import { PaletaService } from "Services/PaletaService";
+import { ActionMode } from "constants/index";
 
-function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
-    const form = {
-        preco: "",
-        sabor: "",
-        recheio: "",
-        descricao: "",
-        foto: "",
-    };
+function AdicionaEditaPaletaModal({ closeModal, onCreatePaleta, mode, paletaToUpdate, onUpdatePaleta }) {
+  const form = {
+    preco: paletaToUpdate?.preco ?? '',
+    sabor: paletaToUpdate?.sabor ?? '',
+    recheio: paletaToUpdate?.recheio ?? '',
+    descricao: paletaToUpdate?.descricao ?? '',
+    foto: paletaToUpdate?.foto ?? '',
+  }
 
     const [state, setState] = useState(form);
     const [canDisable, setCanDisable] = useState(true);
@@ -20,7 +21,7 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
             state.descricao.length &&
             state.foto.length &&
             state.sabor.length &&
-            state.preco.length
+            String(state.preco).length
         );
 
         setCanDisable(response);
@@ -34,22 +35,44 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
         canDisableSendButton();
     });
 
-    const createPaleta = async () => {
-        const renomeiaCaminhoFoto = (fotoPath) => fotoPath.split("\\").pop();
+    const handleSend = async () => {
+        const renomeiaCaminhoFoto = (fotoPath) => fotoPath.split(/\\|\//).pop();
 
         const { sabor, recheio, descricao, preco, foto } = state;
 
         const titulo = sabor + (recheio && " com " + recheio);
 
         const paleta = {
+            ...(paletaToUpdate && { _id: paletaToUpdate?.id }),
             sabor: titulo,
             descricao,
             preco,
             foto: `assets/images/${renomeiaCaminhoFoto(foto)}`,
         };
 
-        const response = await PaletaService.create(paleta);
-        onCreatePaleta(response);
+        const serviceCall = {
+            [ActionMode.NORMAL]: () => PaletaService.create(paleta),
+            [ActionMode.ATUALIZAR]: () => PaletaService.updtateById(paletaToUpdate?.id, paleta),
+          }
+      
+          const response = await serviceCall[mode]();
+      
+          const actionResponse = {
+            [ActionMode.NORMAL]: () => onCreatePaleta(response),
+            [ActionMode.ATUALIZAR]: () => onUpdatePaleta(response),
+          }
+      
+          actionResponse[mode]();
+      
+          const reset = {
+            preco: '',
+            sabor: '',
+            recheio: '',
+            descricao: '',
+            foto: '',
+          }
+      
+          setState(reset);
         closeModal();
     };
 
@@ -57,7 +80,7 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
         <Modal closeModal={closeModal}>
             <div className="AdicionaPaletaModal">
                 <form autoComplete="off">
-                    <h2> Adicionar ao Cardápio </h2>
+                <h2> { ActionMode.ATUALIZAR === mode ? 'Atualizar' : 'Adicionar ao' } Cardápio </h2>
                     <div>
                         <label className="AdicionaPaletaModal__text" htmlFor="preco"> Preco: </label>
                         <input
@@ -106,7 +129,6 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
                             id="foto"
                             type="file"
                             accept="image/png, image/gif, image/jpeg"
-                            value={state.foto}
                             required
                             onChange={(e) => handleChange(e, "foto")} />
                     </div>
@@ -115,8 +137,8 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
                         className="AdicionaPaletaModal__enviar"
                         type="button"
                         disabled={canDisable}
-                        onClick={createPaleta} >
-                        Enviar
+                        onClick={handleSend} >
+              { ActionMode.NORMAL === mode ? 'Enviar' : 'Atualizar' }
                     </button>
                 </form>
             </div>
@@ -124,4 +146,4 @@ function AdicionaPaletaModal({ closeModal, onCreatePaleta }) {
     );
 }
 
-export default AdicionaPaletaModal;
+export default AdicionaEditaPaletaModal;
