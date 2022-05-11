@@ -9,6 +9,7 @@
 * [Índice](#índice)
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Técnicas e tecnologias](#Técnias-e-tecnologias)
+* [Acesso ao Projeto](#Acesso-ao-projeto)
 * [Links uteis](#Links-uteis)
 * [Status do Projeto](#Status-do-projeto)
 
@@ -30,6 +31,20 @@ tudo isso tambem mantendo a responsividade, testada em diversos tamanhos de tela
 - ``ORM: Mongoose - JavaScript``
 - ``Integração com API: JSON - GET (Read All & Read By Id``
 - ``Cloud: Render(Backend) + MongoDB Cloud Atlas, Vercel (Frontend)``
+
+<h2> Acesso ao projeto </h2>
+
+<h4> Pré-requisitos </h4>
+1. Git instalado na sua maquina
+2. Node v12.0.0 ou posterior
+3. Clone o [Repositorio](https://github.com/DanielBento-source/Projeto1-Modulo3-CardapioElGeladon) na sua maquina local
+
+<h4> Instalação </h4>
+1. npm i
+
+<h4> Rodar localmente </h4>
+1. npm start
+
 
 <h2> Links uteis </h2>
 
