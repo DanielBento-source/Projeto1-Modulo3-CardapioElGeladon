@@ -33,9 +33,9 @@ tudo isso tambem mantendo a responsividade, testada em diversos tamanhos de tela
 
 <h2> Links uteis </h2>
 
-link do repositorio da Api que criamos para esse projeto [Servidor](https://github.com/DanielBento-source/Projeto1-Modulo3-Servidor)
-link da Api em cloud + Banco de dados[Api em cloud](https://server-elbeladon-daniel-bento.onrender.com/paletas/api-docs/)
-link do Frontend em cloud [Cardapio El Geladon](https://projeto-modulo3-cardapio-el-geladon.vercel.app/)
+link do repositorio da Api que criamos para esse projeto [Servidor](https://github.com/DanielBento-source/Projeto1-Modulo3-Servidor)<br>
+link da Api em cloud + Banco de dados[Api em cloud](https://server-elbeladon-daniel-bento.onrender.com/paletas/api-docs/)<br>
+link do Frontend em cloud [Cardapio El Geladon](https://projeto-modulo3-cardapio-el-geladon.vercel.app/)<br>
 
 <h2 align="center"> Status do Projeto </h2>
-![Badge mostrando o status](https://img.shields.io/badge/STATUS-FINALIZADO-green)
+- ``Status: Finalizado``
