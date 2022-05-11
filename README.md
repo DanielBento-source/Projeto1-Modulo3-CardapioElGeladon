@@ -38,4 +38,4 @@ link da Api em cloud + Banco de dados[Api em cloud](https://server-elbeladon-dan
 link do Frontend em cloud [Cardapio El Geladon](https://projeto-modulo3-cardapio-el-geladon.vercel.app/)<br>
 
 <h2 align="center"> Status do Projeto </h2>
-- ``Status: Finalizado``
+<b>Status: Finalizado<b>
