@@ -1,6 +1,6 @@
 <h1 align="center"> Projeto Cardapio El Geladon </h1>
 
-![Logo e nome: El Geladon](https://imgur.com/BPFuHAL)
+![Logo e nome: El Geladon](https://i.imgur.com/BPFuHAL.png)
 
 <h2> Indice </h2>
 
