@@ -35,15 +35,13 @@ tudo isso tambem mantendo a responsividade, testada em diversos tamanhos de tela
 <h2> Acesso ao projeto </h2>
 
 <h4> Pré-requisitos </h4>
-1. Git instalado na sua maquina
-2. Node v12.0.0 ou posterior
-3. Clone o [Repositorio](https://github.com/DanielBento-source/Projeto1-Modulo3-CardapioElGeladon) na sua maquina local
-
+  1. Git instalado na sua maquina
+  2. Node v12.0.0 ou posterior
+  3. Clone na sua maquina local o [Repositorio](https://github.com/DanielBento-source/Projeto1-Modulo3-CardapioElGeladon)<br> 
 <h4> Instalação </h4>
-1. npm i
-
+  1. npm i
 <h4> Rodar localmente </h4>
-1. npm start
+  1. npm start
 
 
 <h2> Links uteis </h2>
